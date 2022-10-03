@@ -24,20 +24,57 @@ function writePassword() {
 
     if (correctlyEntered == false) {
 
-      console.log("Please reenter an integer following the minimum - ")
-      console.log("maximum length password guidlines.")
+      alert("Please reenter an integer following the minimum " + FLOORLEN + " chars - maximum " + CEILINGLEN + " chars length password guidlines.")
 
+    } else {
+        alert("Please enter a number greater than or equal to " + FLOORLEN + " and less than or equal to " + CEILINGLEN)
     }
-
-    console.log("Please enter a number greater than or equal to " + FLOORLEN)
-    console.log("and less than or equal to " + CEILINGLEN)
     passwordLen = window.prompt("How many characters in your password: ");
 
     correctlyEntered = false;
     
   }
   
-  console.log(passwordLen)
+//   console.log(passwordLen)
+
+  // Prompting user with series of questions to get desired criteria 
+
+  var desireLower = false;
+  var desireUpper = false;
+  var desireInt = false;
+  var desireSpecial = false;
+  var noCriteria = false;
+
+  while ((desireLower == false) && (desireUpper == false) && (desireInt == false) && (desireSpecial == false)) {
+    
+    if(noCriteria == true) {
+        alert('Please click "OK" to at least one of the following criteria.')
+    }
+
+    if (confirm('Would you like lower case characters? Click "OK" if you do.') == true){
+        desireLower = true;
+    }
+
+    if (confirm('Would you like upper case characters? Click "OK" if you do.') == true){
+        desireUpper = true;
+    }
+
+    if (confirm('Would you like integers? Click "OK" if you do.') == true){
+        desireInt = true;
+    }
+
+    if (confirm('Would you like special characters? Click "OK" if you do.') == true) {
+        desireSpecial = true;
+    }
+    noCriteria = true;
+  }
+
+//   console.log(desireLower);
+//   console.log(desireUpper);
+//   console.log(desireInt);
+//   console.log(desireSpecial);
+
+
   
   // Generate passwords based on criteria selected by user above
 
@@ -61,28 +98,122 @@ function writePassword() {
   var lowerUpperInt = lowerChars.concat(upperChars.concat(intChars));
   var lowerIntSpecial = lowerChars.concat(intChars.concat(specialChars));
   var upperIntSpecial = upperChars.concat(intChars.concat(specialChars));
+  var lowerUpperSpecial = lowerChars.concat(upperChars.concat(specialChars));
 
   var allChars = lowerChars.concat(upperChars.concat(intChars.concat(specialChars)));
 
 
-  function makePassword(arr, length){
+    function makePassword(arr, length){
   
-    var result = ''; 
-    for ( var i = 0; i < length; i++ ) {
-      result += arr[Math.floor(Math.random() * arr.length)];
+        var result = ''; 
+        for ( var i = 0; i < length; i++ ) {
+        result += arr[Math.floor(Math.random() * arr.length)];
+        }
+        return result
     }
 
-    return result
-  }
-
-  var finalPassword = makePassword(allChars, passwordLen);
-
-  console.log("Number of specials is: " + specialChars.length)
-  console.log(allChars.length);
+//   The following if statements are disgusting, I know. If there is a more efficient way of doing this
+//   please let me know the feedback on Canvas.
 
 
-  console.log(finalPassword);
-  passwordText.value = password;
+
+    // var inLower = false;
+    // var inUpper = false;
+    // var inInt = false;
+    // var inSpecial = false;
+
+    var finalPassword = "";
+
+    if (desireLower == true) {
+
+        // inLower = true;
+
+        if (desireUpper == true) {
+
+            // inUpper = true;
+
+            if (desireInt == true) {
+
+                // inInt = true;
+
+                if (desireSpecial == true) {
+
+                    // inSpecial = true;
+
+                    finalPassword = makePassword(allChars, passwordLen);
+
+                } else {
+                    finalPassword = makePassword(lowerUpperInt, passwordLen);
+                } 
+
+            } else if (desireSpecial == true) {
+                
+                // inSpecial = true;
+                finalPassword = makePassword(lowerUpperSpecial, passwordLen);
+        
+            } else {
+                finalPassword = makePassword(lowerUpper, passwordLen);
+            }
+
+        } else if (desireInt == true) {
+
+            // inInt = true;
+            if (desireSpecial == true) {
+
+                // inSpecial = true;
+                finalPassword = makePassword(lowerIntSpecial, passwordLen);
+
+            }
+
+        } else if (desireSpecial == true) {
+
+            finalPassword = makePassword(lowerSpecial, passwordLen);
+
+        } else {
+            finalPassword = makePassword(lowerChars, passwordLen);
+        }
+    } else if (desireUpper == true) {
+
+        if (desireInt == true) {
+
+            if (desireSpecial == true) {
+                finalPassword = makePassword(upperIntSpecial, passwordLen);
+            } else {
+                finalPassword = makePassword(upperInt, passwordLen);
+            }
+
+        } else if (desireSpecial == true) {
+
+            finalPassword = makePassword(upperspecial, passwordLen);
+
+        } else {
+
+            finalPassword = makePassword(upperChars, passwordLen);
+            
+        }
+    } else if (desireInt == true) {
+
+        if (desireSpecial == true) {
+            finalPassword = makePassword(intSpecial, passwordLen);
+        } else {
+            finalPassword = makePassword(intChars, passwordLen);
+        }
+
+    } else{
+
+        finalPassword = makePassword(specialChars, passwordLen)
+        
+    }
+
+
+
+//   console.log("Number of specials is: " + specialChars.length)
+//   console.log(allChars.length);
+
+
+//   console.log(finalPassword);
+  passwordText.value = finalPassword;
+//   document.getElementById("password").innerHTML = "Is this working?";
 
   return finalPassword;
 
