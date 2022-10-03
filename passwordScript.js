@@ -1,8 +1,8 @@
 // CONSTANTS
 
-// Maximum number of characters password can be is CEILINGLEN set to 126
-// Minimum number of characters password can be is FLOORLEN set to 8
-var CEILINGLEN = 126;
+// Maximum number of characters password can be is CEILINGLEN
+// Minimum number of characters password can be is FLOORLEN
+var CEILINGLEN = 128;
 var FLOORLEN = 8;
 
 // Assignment code here
