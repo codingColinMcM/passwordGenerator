@@ -10,4 +10,4 @@ A web application that allows the user to generate a password based on the crite
 
 ## Deployed App URL
 
-https://codingcolinmcm.github.io/weekThreeChallenge/
+https://codingcolinmcm.github.io/passwordGenerator/
