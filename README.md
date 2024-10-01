@@ -6,7 +6,7 @@ A web application that allows the user to generate a password based on the crite
 
 ## Screenshot
 
-![image](https://user-images.githubusercontent.com/112663656/193699493-21be6043-5694-42ec-b82d-6c91c70894c6.png)
+![image](https://github.com/user-attachments/assets/1f791e2c-a94f-4e60-bd56-73d1ca078c52)
 
 ## Deployed App URL
 
